@@ -6,7 +6,6 @@ use strict;
 use diagnostics;
 use 5.010;
 use List::MoreUtils qw(uniq);
-use List::MoreUtils qw(indexes);
 
 print "Welcome to the Vigenere Cipher Cracking tool\n";
 print "Please input the encoded text: ";
