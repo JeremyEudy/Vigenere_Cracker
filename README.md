@@ -17,7 +17,7 @@ cpan List::MoreUtilities
 ### Usage
 VCrack.pl
 ```
-perl VCrack.pl
+perl VCipher.pl
 ```
 
 ### Author
