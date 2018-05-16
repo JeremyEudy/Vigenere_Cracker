@@ -1,5 +1,5 @@
 # Vigenère Cracker
-A Perl program for cracking text enciphered with the Vigenère cipher method.
+A Perl program for cracking text enciphered with the Vigenère cipher method, and a C program for encoding text with the same method.
 
 ## Getting Started
 Easy clone:
@@ -15,11 +15,15 @@ This project utilizes the List::MoreUtilities Perl library, specifically the "un
 cpan List::MoreUtilities
 ```
 ### Usage
-VCrack.pl
+VCipher.pl
 ```
 perl VCipher.pl
 ```
-
+VEncode.c
+```
+gcc -o VEncode VEncode.c
+./VEncode
+```
 ### Author
 Jeremy Eudy
 
