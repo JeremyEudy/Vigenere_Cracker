@@ -6,14 +6,13 @@
 /*   By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o      */
 /*                                                      |---\  \   `|  l      */
 /*   Created: 2018/05/16 15:39:16 by jeudy2552          | ` .\  \   |  y      */
-/*   Updated: 2018/05/18 17:42:39 by jeudy2552          -------------         */
+/*   Updated: 2018/05/18 17:46:36 by jeudy2552          -------------         */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-//This almost works 100%, just fix the bad offset, add support for spaces, punctuation, and caps.
 
 int main(){
     char key[100];
@@ -61,11 +60,9 @@ int main(){
         if(cipherInt>=26){
             cipherInt = cipherInt%26;
             cipher[i] = alpha[cipherInt];
-//            printf("\nCiphertext so far: %s", cipher);
         }
         else{
             cipher[i] = alpha[cipherInt];
-//            printf("\nCiphertext so far: %s", cipher);
         }
     }
 
