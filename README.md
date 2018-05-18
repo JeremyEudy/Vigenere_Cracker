@@ -19,6 +19,10 @@ VCipher.pl
 ```
 perl VCipher.pl
 ```
+VEncode.pl
+```
+perl VEncode.pl
+```
 VEncode.c
 ```
 gcc -o VEncode VEncode.c
