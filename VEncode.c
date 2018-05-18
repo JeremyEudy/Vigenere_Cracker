@@ -6,7 +6,7 @@
 /*   By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o      */
 /*                                                      |---\  \   `|  l      */
 /*   Created: 2018/05/16 15:39:16 by jeudy2552          | ` .\  \   |  y      */
-/*   Updated: 2018/05/17 23:57:55 by jeudy2552          -------------         */
+/*   Updated: 2018/05/18 17:42:39 by jeudy2552          -------------         */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -19,9 +19,9 @@ int main(){
     char key[100];
     char message[100];
     char cipher[100];
-    char alpha[26] = {
+    char alpha[27] = {
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-        'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
     int messageLen;
     int keyLen;
     int cipherInt;
@@ -30,9 +30,15 @@ int main(){
 
     printf("Welcome to the Vigenere cipher encoder\n");
     printf("Please input a key: ");
-    scanf("%s", key);
-    printf("\nPlease input message: ");
-    scanf("%s", message);
+    scanf("%[^\n]%*c", key);
+    printf("Please input message: ");
+    scanf("%[^\n]%*c", message);
+    for(int i=0; key[i]; i++){
+        key[i] = tolower(key[i]);
+    }
+    for(int i=0; message[i]; i++){
+        message[i] = tolower(message[i]);
+    }
 
     messageLen = strlen (message);
     keyLen = strlen (key);
@@ -40,7 +46,7 @@ int main(){
         mLetter = message[i];
         if(isspace(mLetter)){
             j--;
-            cipher[i] = " ";
+            cipher[i] = alpha[26];
             continue;
         }
         if(j >= keyLen){
@@ -55,12 +61,14 @@ int main(){
         if(cipherInt>=26){
             cipherInt = cipherInt%26;
             cipher[i] = alpha[cipherInt];
+//            printf("\nCiphertext so far: %s", cipher);
         }
         else{
             cipher[i] = alpha[cipherInt];
+//            printf("\nCiphertext so far: %s", cipher);
         }
     }
 
-    printf("\nYour ciphertext is: %s\n", cipher);
+    printf("Your ciphertext is: %s\n", cipher);
     return 0;
 }
