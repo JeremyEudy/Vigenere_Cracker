@@ -28,6 +28,11 @@ VEncode.c
 gcc -o VEncode VEncode.c
 ./VEncode
 ```
+Project-1-Code--Eudy-Jeremy.c
+```
+gcc -o VEncode Project-1-Code--Eudy-Jeremy.c
+./VEncode
+```
 ### Author
 Jeremy Eudy
 
