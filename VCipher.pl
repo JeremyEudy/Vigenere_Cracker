@@ -118,13 +118,15 @@ $offset+=$keySize;
 for (my $i=0; $i<$strLength; $i++){
     if ($offset < 0){
         my $cryptogram = substr $cipherText, $i, $offset;
-        push @cryptograms, $cryptogram;
+        my @cryptogramArray = split //, $cryptogram;
+        push @cryptograms, \@cryptogramArray;
         #print "$offset ";
         $offset++;
     }
     elsif ($offset == 0){
         my $cryptogram = substr $cipherText, $i;
-        push @cryptograms, $cryptogram;
+        my @cryptogramArray = split //, $cryptogram;
+        push @cryptograms, \@cryptogramArray;
         last;
     }
 }
@@ -136,14 +138,18 @@ for (my $i=0; $i<$keySize; $i++){
 }
 #print "@frequencyArray\n";
 
-#This uses a pointer to the arrays instead of actually copying them. This might work in the end, but I'm doubtful.
 for (my $i=0; $i<$#alpha+1; $i++){
     $frequency{$alpha[$i]} = \@frequencyArray;
 }
-#while (my ($key, $value) = each %frequency){
-#    print "$key: $value\n";
-#}
+while (my ($key, $value) = each %frequency){
+    print "$key: @$value\n";
+}
 
-
+#Need to check letter frequency based on position in cryptograms and store that value in @frequencyArray
+for (my $i=0; $i<$#frequencyArray+1; $i++){
+    for (my $j=0; $j<$#cryptogramArray+1; $j++){
+        
+    }
+}
 
 
