@@ -1,4 +1,3 @@
-#!/usr/bin/perl
 # **************************************************************************** #
 #                                                                              #
 #                                                             |\               #
@@ -7,9 +6,10 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/22 10:22:42 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/05/22 10:22:42 by jeudy2552          -------------          #
+#    Updated: 2018/08/27 14:44:28 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
+#!/usr/bin/perl
 
 use warnings;
 use strict;
@@ -44,6 +44,7 @@ my @keySizes;
 my %count;
 my $keySize;
 my @cryptograms;
+my @cryptogramArray;
 my %frequency;
 
 #Assemble an array of trigraphs from ciphertext
@@ -118,15 +119,15 @@ $offset+=$keySize;
 for (my $i=0; $i<$strLength; $i++){
     if ($offset < 0){
         my $cryptogram = substr $cipherText, $i, $offset;
-        my @cryptogramArray = split //, $cryptogram;
-        push @cryptograms, \@cryptogramArray;
+        @cryptogramArray = split //, $cryptogram;
+        push @cryptograms, @cryptogramArray;
         #print "$offset ";
         $offset++;
     }
     elsif ($offset == 0){
         my $cryptogram = substr $cipherText, $i;
         my @cryptogramArray = split //, $cryptogram;
-        push @cryptograms, \@cryptogramArray;
+        push @cryptograms, @cryptogramArray;
         last;
     }
 }
@@ -136,14 +137,13 @@ my @frequencyArray;
 for (my $i=0; $i<$keySize; $i++){
     push @frequencyArray, 0;
 }
-#print "@frequencyArray\n";
 
 for (my $i=0; $i<$#alpha+1; $i++){
     $frequency{$alpha[$i]} = \@frequencyArray;
 }
-while (my ($key, $value) = each %frequency){
-    print "$key: @$value\n";
-}
+
+print "cryptograms:\n";
+print @cryptogramArray;
 
 #Need to check letter frequency based on position in cryptograms and store that value in @frequencyArray
 for (my $i=0; $i<$#frequencyArray+1; $i++){
@@ -152,4 +152,7 @@ for (my $i=0; $i<$#frequencyArray+1; $i++){
     }
 }
 
-
+#print "@frequencyArray\n";
+while (my ($key, $value) = each %frequency){
+    print "$key: @$value\n";
+}
