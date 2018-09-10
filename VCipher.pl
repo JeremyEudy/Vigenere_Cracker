@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/22 10:22:42 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/08/27 14:44:28 by jeudy2552          -------------          #
+#    Updated: 2018/09/10 14:28:53 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 #!/usr/bin/perl
@@ -30,6 +30,7 @@ print "Please input the encoded text: ";
 my $cipherText = <>;
 my @alpha = ('A' .. 'Z');
 $cipherText =~ s/\s+//g; #Remove spaces from string
+$cipherText =~ s/[^a-zA-Z]//g; #Remove non-alpha from string
 my $strLength = length $cipherText;
 my $offset = $strLength*-1;
 $offset+=3;
