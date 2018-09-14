@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                             |\               #
-#    VCipher.pl                                         ------| \----          #
+#    Cracker.pl                                         ------| \----          #
 #                                                       |    \`  \  |  p       #
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/22 10:22:42 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/10 14:28:53 by jeudy2552          -------------          #
+#    Updated: 2018/09/14 12:31:40 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 #!/usr/bin/perl
@@ -24,8 +24,11 @@ sub gcd {
     while ($x) { ($x, $y) = ($y % $x, $x); }
     $y;
 }
-
+system('clear');
 print "Welcome to the Vigenere Cipher Cracking tool\n";
+INPUT:
+print "Would you like to import ciphertext from a file or command line?\n1 - File Import\n2 - User Input\n>";
+my $
 print "Please input the encoded text: ";
 my $cipherText = <>;
 my @alpha = ('A' .. 'Z');
