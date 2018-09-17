@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/22 10:22:42 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/14 12:31:40 by jeudy2552          -------------          #
+#    Updated: 2018/09/17 11:21:12 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 #!/usr/bin/perl
@@ -24,20 +24,7 @@ sub gcd {
     while ($x) { ($x, $y) = ($y % $x, $x); }
     $y;
 }
-system('clear');
-print "Welcome to the Vigenere Cipher Cracking tool\n";
-INPUT:
-print "Would you like to import ciphertext from a file or command line?\n1 - File Import\n2 - User Input\n>";
-my $
-print "Please input the encoded text: ";
-my $cipherText = <>;
-my @alpha = ('A' .. 'Z');
-$cipherText =~ s/\s+//g; #Remove spaces from string
-$cipherText =~ s/[^a-zA-Z]//g; #Remove non-alpha from string
-my $strLength = length $cipherText;
-my $offset = $strLength*-1;
-$offset+=3;
-my $cipherLength = length($cipherText) - 1;
+my $cipherText = '';
 my @trigraphs;
 my @dups;
 my $counter = 0;
@@ -50,6 +37,41 @@ my $keySize;
 my @cryptograms;
 my @cryptogramArray;
 my %frequency;
+my @alpha = ('A' .. 'Z');
+system('clear');
+print "Welcome to the Vigenere Cipher Cracking tool\n";
+INPUT:
+print "Would you like to import ciphertext from a file or command line?\n1 - User Input\n2 - File Import\n>";
+my $choice = <>;
+if($choice == 1){
+    print "Please input the encoded text: ";
+    $cipherText = <>;
+    $cipherText = uc $cipherText;
+    $cipherText =~ s/\s+//g; #Remove spaces from string
+    $cipherText =~ s/[^a-zA-Z]//g; #Remove non-alpha from string
+    my $strLength = length $cipherText;
+    my $offset = $strLength*-1;
+    $offset+=3;
+    my $cipherLength = length($cipherText) - 1;
+}
+elsif($choice == 2){
+    print "Please input the filename: ";
+    my $fileName = <>;
+    my $content = '';
+    open(my $fileContents, "<$fileName") or die "Couldn't open $fileName, $!";
+    {
+        local $/;
+        $content = <$fileContents>;
+    }
+    close($fileContents);
+    $cipherText = uc $content;
+    $cipherText =~ s/\s+//g; #Remove spaces from string
+    $cipherText =~ s/[^a-zA-Z]//g; #Remove non-alpha from string
+    my $strLength = length $cipherText;
+    my $offset = $strLength*-1;
+    $offset+=3;
+    my $cipherLength = length($cipherText) - 1;
+}
 
 #Assemble an array of trigraphs from ciphertext
 for (my $i=0; $i<$strLength; $i++){
