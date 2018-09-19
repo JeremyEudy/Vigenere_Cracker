@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/22 10:22:42 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/19 14:36:11 by jeudy2552          -------------          #
+#    Updated: 2018/09/19 14:47:40 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 #!/usr/bin/perl
@@ -175,7 +175,10 @@ print @cryptogramArray;
 
 #Need to check letter frequency based on position in cryptograms and store that value in @frequencyArray
 foreach my $cryptogram (@cryptogramArray){
-    
+    my @cryptoBreakUp = split //, $cryptogram;
+    for (my $i=0; $i<$keySize; $i++){
+        $frequency{$cryptoBreakUp[$i]}++;
+    }
 }
 
 #print "@frequencyArray\n";

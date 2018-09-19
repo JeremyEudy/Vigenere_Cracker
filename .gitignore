@@ -1,3 +1,7 @@
 # Swap check #
 ##############
 *.swp
+
+# text files #
+##############
+*.txt
