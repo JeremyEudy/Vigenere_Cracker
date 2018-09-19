@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/22 10:22:42 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/17 11:21:12 by jeudy2552          -------------          #
+#    Updated: 2018/09/19 14:36:11 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 #!/usr/bin/perl
@@ -28,6 +28,8 @@ my $cipherText = '';
 my @trigraphs;
 my @dups;
 my $counter = 0;
+my $offset;
+my $strLength;
 my %seen;
 my %offsets;
 my @gcd;
@@ -172,10 +174,8 @@ print "cryptograms:\n";
 print @cryptogramArray;
 
 #Need to check letter frequency based on position in cryptograms and store that value in @frequencyArray
-for (my $i=0; $i<$#frequencyArray+1; $i++){
-    for (my $j=0; $j<$#cryptogramArray+1; $j++){
-        
-    }
+foreach my $cryptogram (@cryptogramArray){
+    
 }
 
 #print "@frequencyArray\n";
