@@ -1,15 +1,15 @@
-#!/usr/bin/perl
 # **************************************************************************** #
 #                                                                              #
 #                                                             |\               #
-#    VEncode.pl                                         ------| \----          #
+#    VCipher.pl                                         ------| \----          #
 #                                                       |    \`  \  |  p       #
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/17 22:37:25 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/05/17 22:37:25 by jeudy2552          -------------          #
+#    Updated: 2018/09/23 15:54:58 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
+#!/usr/bin/env perl
 use warnings;
 use strict;
 use diagnostics;
@@ -53,16 +53,8 @@ if($inputChoice == 1){
         my $keyLetter = substr($key, $j, 1);
         my $messageInt = $alphaNum{$letter};
         my $keyInt = $alphaNum{$keyLetter};
-        $cipherInt = $messageInt+$keyInt;
-
-        if ($cipherInt>=26){
-            $cipherInt = $cipherInt%26;
-            $cipher .= $revAlphaNum{$cipherInt};
-        }
-
-        else{
-            $cipher .= $revAlphaNum{$cipherInt};
-        }
+        $cipherInt = ($messageInt+$keyInt)%26;
+        $cipher .= $revAlphaNum{$cipherInt};
     }
     print "\nYour ciphertext is: $cipher\n";
 }
@@ -73,15 +65,15 @@ elsif($inputChoice == 2){
     print "Please input the ciphertext: ";
     my $message = <>; $message = lc $message;
     chomp $message;
-    
+
     my $plainInt;
     my $plain;
     my $messageLen = length $message;
     my $keyLen = length $key;
-    
+
     for(my $i=0, my $j=0; $i<$messageLen; $i++, $j++){
         my $letter = substr($message, $i, 1);
-    
+
         if($letter eq " "){
             $j-=1;
             $plain .= " ";
@@ -95,18 +87,14 @@ elsif($inputChoice == 2){
         my $keyLetter = substr($key, $j, 1);
         my $messageInt = $alphaNum{$letter};
         my $keyInt = $alphaNum{$keyLetter};
-        $plainInt = $messageInt-$keyInt;
-
-        if ($plainInt>=26){
-            $plainInt = $plainInt%26;
-            $plain .= $revAlphaNum{$plainInt};
-        }
-
-        else{
-            $plain .= $revAlphaNum{$plainInt};
-        }
+        $plainInt = ($messageInt-$keyInt)%26;
+        $plain .= $revAlphaNum{$plainInt};
     }
     print "\nYour plaintext is: $plain\n";
     
+}
+else{
+    print "Please input a valid response.\n";
+    goto INPUT;
 }
 exit;
