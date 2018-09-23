@@ -51,8 +51,8 @@ if($choice == 1){
     $cipherText = uc $cipherText;
     $cipherText =~ s/\s+//g; #Remove spaces from string
     $cipherText =~ s/[^a-zA-Z]//g; #Remove non-alpha from string
-    my $strLength = length $cipherText;
-    my $offset = $strLength*-1;
+    $strLength = length $cipherText;
+    $offset = $strLength*-1;
     $offset+=3;
     my $cipherLength = length($cipherText) - 1;
 }
@@ -69,8 +69,8 @@ elsif($choice == 2){
     $cipherText = uc $content;
     $cipherText =~ s/\s+//g; #Remove spaces from string
     $cipherText =~ s/[^a-zA-Z]//g; #Remove non-alpha from string
-    my $strLength = length $cipherText;
-    my $offset = $strLength*-1;
+    $strLength = length $cipherText;
+    $offset = $strLength*-1;
     $offset+=3;
     my $cipherLength = length($cipherText) - 1;
 }
