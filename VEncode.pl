@@ -20,46 +20,93 @@ my %alphaNum = (
         v => 21, w => 22, x => 23, y => 24, z => 25,
 );
 my %revAlphaNum = reverse %alphaNum;
+INPUT:
+system('clear');
+print "Welcome to the Vigenere cipher encoder and decoder.\n1 - Encode\n2 - Decode\n>";
+my $inputChoice = <>;
+if($inputChoice == 1){
+    print "Please input a key: ";
+    my $key = <>;
+    chomp $key; $key = lc $key;
+    print "Please input a message: ";
+    my $message = <>; $message = lc $message;
+    chomp $message;
+    
+    my $cipherInt;
+    my $cipher;
+    my $messageLen = length $message;
+    my $keyLen = length $key;
+    
+    for(my $i=0, my $j=0; $i<$messageLen; $i++, $j++){
+        my $letter = substr($message, $i, 1);
+    
+        if($letter eq " "){
+            $j-=1;
+            $cipher .= " ";
+            next;
+        }
 
-print "Welcome to the Vigenere cipher encoder.\n";
-print "Please input a key: ";
-my $key = <>;
-chomp $key; $key = lc $key;
-print "Please input a message: ";
-my $message = <>; $message = lc $message;
-chomp $message;
+        if($j >= $keyLen){
+            $j=0;
+        }
 
-my $cipherInt;
-my $cipher;
-my $messageLen = length $message;
-my $keyLen = length $key;
+        my $keyLetter = substr($key, $j, 1);
+        my $messageInt = $alphaNum{$letter};
+        my $keyInt = $alphaNum{$keyLetter};
+        $cipherInt = $messageInt+$keyInt;
 
-for(my $i=0, my $j=0; $i<$messageLen; $i++, $j++){
-    my $letter = substr($message, $i, 1);
+        if ($cipherInt>=26){
+            $cipherInt = $cipherInt%26;
+            $cipher .= $revAlphaNum{$cipherInt};
+        }
 
-    if($letter eq " "){
-        $j-=1;
-        $cipher .= " ";
-        next;
+        else{
+            $cipher .= $revAlphaNum{$cipherInt};
+        }
     }
-
-    if($j >= $keyLen){
-        $j=0;
-    }
-
-    my $keyLetter = substr($key, $j, 1);
-    my $messageInt = $alphaNum{$letter};
-    my $keyInt = $alphaNum{$keyLetter};
-    $cipherInt = $messageInt+$keyInt;
-
-    if ($cipherInt>=26){
-        $cipherInt = $cipherInt%26;
-        $cipher .= $revAlphaNum{$cipherInt};
-    }
-
-    else{
-        $cipher .= $revAlphaNum{$cipherInt};
-    }
+    print "\nYour ciphertext is: $cipher\n";
 }
-print "\nYour cipher text is: $cipher\n";
+elsif($inputChoice == 2){
+    print "Please input a key: ";
+    my $key = <>;
+    chomp $key; $key = lc $key;
+    print "Please input the ciphertext: ";
+    my $message = <>; $message = lc $message;
+    chomp $message;
+    
+    my $plainInt;
+    my $plain;
+    my $messageLen = length $message;
+    my $keyLen = length $key;
+    
+    for(my $i=0, my $j=0; $i<$messageLen; $i++, $j++){
+        my $letter = substr($message, $i, 1);
+    
+        if($letter eq " "){
+            $j-=1;
+            $plain .= " ";
+            next;
+        }
+
+        if($j >= $keyLen){
+            $j=0;
+        }
+
+        my $keyLetter = substr($key, $j, 1);
+        my $messageInt = $alphaNum{$letter};
+        my $keyInt = $alphaNum{$keyLetter};
+        $plainInt = $messageInt-$keyInt;
+
+        if ($plainInt>=26){
+            $plainInt = $plainInt%26;
+            $plain .= $revAlphaNum{$plainInt};
+        }
+
+        else{
+            $plain .= $revAlphaNum{$plainInt};
+        }
+    }
+    print "\nYour plaintext is: $plain\n";
+    
+}
 exit;
