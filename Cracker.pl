@@ -6,7 +6,7 @@
 #    By: jeudy2552 <jeudy2552@floridapoly.edu>          |  \`-\   \ |  o       #
 #                                                       |---\  \   `|  l       #
 #    Created: 2018/05/22 10:22:42 by jeudy2552          | ` .\  \   |  y       #
-#    Updated: 2018/09/19 14:47:40 by jeudy2552          -------------          #
+#    Updated: 2018/09/24 14:46:09 by jeudy2552          -------------          #
 #                                                                              #
 # **************************************************************************** #
 #!/usr/bin/perl
@@ -142,20 +142,18 @@ $keySize = $keys[-1];
 print "\nGuessed key size: $keySize\n";
 
 #Assemble array of cryptograms of the same length as $keySize
-$offset = $strLength*-1;
-$offset+=$keySize;
-for (my $i=0; $i<$strLength; $i++){
-    if ($offset < 0){
+$offset = $keySize;
+for (my $i=0; $i<$strLength; $i+=$keySize){
+    if ($offset+$keySize < $strLength){
         my $cryptogram = substr $cipherText, $i, $offset;
-        @cryptogramArray = split //, $cryptogram;
-        push @cryptograms, @cryptogramArray;
+        print "Current cryptogram value: $cryptogram\n";
+        push @cryptograms, $cryptogram;
         #print "$offset ";
-        $offset++;
+        $offset+=$keySize;
     }
-    elsif ($offset == 0){
+    elsif ($offset+$keySize > $strLength){
         my $cryptogram = substr $cipherText, $i;
-        my @cryptogramArray = split //, $cryptogram;
-        push @cryptograms, @cryptogramArray;
+        push @cryptograms, $cryptogram;
         last;
     }
 }
@@ -173,13 +171,7 @@ for (my $i=0; $i<$#alpha+1; $i++){
 print "cryptograms:\n";
 print @cryptogramArray;
 
-#Need to check letter frequency based on position in cryptograms and store that value in @frequencyArray
-foreach my $cryptogram (@cryptogramArray){
-    my @cryptoBreakUp = split //, $cryptogram;
-    for (my $i=0; $i<$keySize; $i++){
-        $frequency{$cryptoBreakUp[$i]}++;
-    }
-}
+
 
 #print "@frequencyArray\n";
 while (my ($key, $value) = each %frequency){
