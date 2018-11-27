@@ -12,7 +12,7 @@ Or replace ```~/Vigenere_Cracker``` with a different valid location.
 ### Prerequisites
 This project utilizes the List::MoreUtilities Perl library, specifically the "unique" and "indexes" modules.
 ```
-cpan List::MoreUtilities
+# cpan List::MoreUtils
 ```
 ### Usage
 Cracker.pl
